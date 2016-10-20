@@ -13,7 +13,7 @@
 static var_val_pair *first;
 static unsigned char parse_in_progress = 0;  // should be atomic_flag, needs gcc 4.9 :(
 
-char *config_get_strval(config_data config, char *var_name)
+char *config_get_strval(config_data config, char *var_name, char *default_value)
 {
   var_val_pair *browse = config;
   while (browse)
@@ -22,21 +22,21 @@ char *config_get_strval(config_data config, char *var_name)
        return browse->val;
      browse = browse->next;
   }
-  return 0;
+  return default_value;
 }
 
-int config_get_intval(config_data config, char *var_name)
+int config_get_intval(config_data config, char *var_name, int default_value)
 {
-  int x = 0;
-  char *val = config_get_strval(config, var_name);
+  int x = default_value;
+  char *val = config_get_strval(config, var_name, 0);
   if (val != 0) sscanf(val, "%d", &x);
   return x;
 }
 
-double config_get_doubleval(config_data config, char *var_name)
+double config_get_doubleval(config_data config, char *var_name, double default_value)
 {
-  double x = 0;
-  char *val = config_get_strval(config, var_name);
+  double x = default_value;
+  char *val = config_get_strval(config, var_name, 0);
   if (val != 0) sscanf(val, "%lf", &x);
   return x;
 }

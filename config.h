@@ -16,11 +16,11 @@ typedef var_val_pair *config_data;
 config_data read_config(char *filename);
 
 // retrieve a string value for the specified variable
-char *config_get_strval(config_data config, char *var_name);
+char *config_get_strval(config_data config, char *var_name, char *default_value);
 // retrieve an int value for the specified variable
-int config_get_intval(config_data config, char *var_name);
+int config_get_intval(config_data config, char *var_name, int default_value);
 // retrieve a double value for the specified variable
-double config_get_doubleval(config_data config, char *var_name);
+double config_get_doubleval(config_data config, char *var_name, double default_value);
 
 // release config data from the memory
 void config_dispose(config_data config);
