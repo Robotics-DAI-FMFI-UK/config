@@ -25,6 +25,14 @@ char *config_get_strval(config_data config, char *var_name, char *default_value)
   return default_value;
 }
 
+char *config_get_alloc_strval(config_data config, char *var_name, char *default_value)
+{
+  char *val = config_get_strval(config, var_name, default_value);
+  char *newval = (char *) malloc(strlen(val) + 1);
+  strcpy(newval, val);
+  return newval;
+}
+
 int config_get_intval(config_data config, char *var_name, int default_value)
 {
   int x = default_value;
